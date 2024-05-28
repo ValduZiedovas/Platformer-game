@@ -15,15 +15,4 @@ public class CameraFollow : MonoBehaviour
         transform.position = new Vector3(target.transform.position.x, target.transform.position.y, -10) + new Vector3(xOffset, yOffset, -10);  
     }
 
-
-    /*
-    void FixedUpdate()
-    {
-        if (target != null)
-        {
-            Vector3 desiredPosition = target.position + offset;
-            Vector3 smoothedPosition = Vector3.Lerp(transform.position, desiredPosition, smoothSpeed);
-            transform.position = smoothedPosition;
-        }
-    }*/
 }

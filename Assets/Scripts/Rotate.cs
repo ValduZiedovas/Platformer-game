@@ -1,21 +1,20 @@
 using System.Collections;
 using System.Collections.Generic;
-using Unity.VisualScripting;
 using UnityEngine;
 
-public class PlayerMove : MonoBehaviour
+public class Rotate : MonoBehaviour
 {
-    public float speed = 5f;
     public float jumpForce = 10f;
+    public float moveSpeed = 5f;
     private Rigidbody2D rb;
     private bool isGrounded;
     public Transform groundCheck;
-    public float groundCheckRadius = 0.1f;
+    public float groundCheckRadius;
     public LayerMask groundLayer;
 
     private bool isRotating = false;
     private float targetRotation;
-    private float rotationSpeed = 360f;
+    private float rotationSpeed = 360f; // Degrees per second
 
     void Start()
     {
@@ -24,15 +23,21 @@ public class PlayerMove : MonoBehaviour
 
     void Update()
     {
+        float moveInput = Input.GetAxisRaw("Horizontal");
+
+        Vector3 moveDirection = new Vector3(moveInput, 0, 0);
+        transform.position += moveDirection * moveSpeed * Time.deltaTime;
+
         CheckGrounded();
 
-        float moveInput = Input.GetAxisRaw("Horizontal");
-        Vector3 moveDirection = new Vector3(moveInput, 0, 0);
-        transform.position += moveDirection * speed * Time.deltaTime;
-
-        if (isGrounded && Input.GetMouseButtonDown(0))
+        if (isGrounded && Input.GetKeyDown(KeyCode.Space))
         {
             Jump();
+        }
+
+        if (isGrounded && moveInput != 0 && !isRotating)
+        {
+            RotateCube();
         }
 
         if (isRotating)
@@ -48,7 +53,7 @@ public class PlayerMove : MonoBehaviour
 
     void Jump()
     {
-        rb.velocity = new Vector2(rb.velocity.x, jumpForce);
+       
         RotateCube();
     }
 
