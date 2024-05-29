@@ -1,24 +1,18 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.SceneManagement;
 
 public class Teleportas : MonoBehaviour
 {
-    public GameObject portal;
-    private GameObject player;
-       // Start is called before the first frame update
-    void Start()
+    public AudioSource audioSource2;
+    private void OnTriggerEnter2D(Collider2D collision)
     {
-        player = GameObject.FindWithTag("Player");
-    }
-
-    // Update is called once per frame
-    private void OnTriggerEnter2D( Collider2D collision)
-    {
-        if(collision. tag == "Player")
+        if (collision.gameObject.CompareTag("Player"))
         {
-            player.transform.position = new Vector2(portal.transform.position.x,portal.transform.position.y);
+            int currentSceneIndex = SceneManager.GetActiveScene().buildIndex;
+            SceneManager.LoadScene(currentSceneIndex + 1);
+            audioSource2.Play();
         }
-        
     }
 }
