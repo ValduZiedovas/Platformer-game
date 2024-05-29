@@ -1,1 +1,1 @@
-Play zis game pls https://github.com/ValduZiedovas/Platformer-game
+Play zis game pls https://play.unity.com/mg/other/webgl-builds-414261
